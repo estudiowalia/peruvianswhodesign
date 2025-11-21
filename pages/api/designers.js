@@ -1,11 +1,11 @@
 import { google } from "googleapis";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   try {
     const auth = new google.auth.GoogleAuth({
       credentials: {
         client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY,
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
       },
       scopes: [
         "https://www.googleapis.com/auth/drive",
@@ -19,16 +19,13 @@ export default async (req, res) => {
       version: "v4",
     });
 
-    // Replace the spreadsheetId with your spreadsheet ID.
-    // Replace the range with the tab name.
-    // Issues with permissions look at this guide: https://leerob.io/snippets/google-sheets
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: "1u-vQ1fGkclf30XJ8wU5-I0EsITs-OnfyjrjF0tPtdPrI",
-      range: "Designers", // sheet name
+      range: "Designers",
     });
 
-    //TODO: Map the collum to object name automatically.
-    const rows = response.data.values;
+    const rows = response.data.values || [];
+
     const db = rows.map((row) => ({
       name: row[0],
       location: row[1],
@@ -38,14 +35,16 @@ export default async (req, res) => {
       featured: row[5],
     }));
 
-    let sanitizeResult = db.filter(
-      (item) => item.name != "" && item.approved == "Yes"
+    const sanitizeResult = db.filter(
+      (item) => item.name && item.approved === "Yes"
     );
 
-    res.statusCode = 200;
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify(sanitizeResult));
+    return res.status(200).json(sanitizeResult);
   } catch (err) {
-    console.log(err);
+    console.error("Google Sheets ERROR:", err);
+    return res.status(500).json({
+      error: true,
+      message: err.message,
+    });
   }
-};
+}
