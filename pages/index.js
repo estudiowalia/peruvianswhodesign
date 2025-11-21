@@ -221,11 +221,59 @@ function Content({ designers, handleOpenFilter, className, onClick }) {
           {designers != null ? (
             <tbody>
               {designers.map((d, i) => (
-                <tr key={`${d.name}-${i}`}>
-                  <td><a href={d.link}>{d.name}</a></td>
-                  <td className="thsize-aux dn"><a href={d.link}>{d.location}</a></td>
-                  <td className="thsize-aux"><a href={d.link}>{d.expertise}</a></td>
-                  <td className="thsize-link"><a href={d.link}>→</a></td>
+                <tr key={`${d.name}-${i}`}
+    className="clickableRow"
+    tabIndex={0}
+    onClick={() => {
+      if (!d.link) return;
+      window.open(d.link, "_blank", "noopener,noreferrer");
+    }}
+    onKeyDown={(e) => {
+      if ((e.key === "Enter" || e.key === " ") && d.link) {
+        window.open(d.link, "_blank", "noopener,noreferrer");
+      }
+    }}
+  >
+    <td>
+      <a
+        href={d.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {d.name}
+      </a>
+    </td>
+    <td className="thsize-aux dn">
+      <a
+        href={d.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {d.location}
+      </a>
+    </td>
+    <td className="thsize-aux">
+      <a
+        href={d.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {d.expertise}
+      </a>
+    </td>
+    <td className="thsize-link">
+      <a
+        href={d.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+      >
+        →
+      </a>
+    </td>
                 </tr>
               ))}
             </tbody>
@@ -272,6 +320,19 @@ function Content({ designers, handleOpenFilter, className, onClick }) {
           padding-top: 0;
           padding-bottom: 0;
         }
+
+        .clickableRow {
+        cursor: pointer;
+        transition: background-color 0.15s ease, transform 0.1s ease;
+      }
+
+      .clickableRow:hover,
+      .clickableRow:focus {
+        background-color: rgba(148, 163, 184, 0.12);
+        transform: translateY(-1px);
+        outline: none;
+      }
+    
       `}</style>
 
       <Analytics />
