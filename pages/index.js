@@ -43,6 +43,7 @@ export async function getStaticProps() {
       designers,
       filters,
     },
+    revalidate: 60,
   };
 }
 
