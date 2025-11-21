@@ -12,7 +12,7 @@ export async function getStaticProps() {
   const origin =
     process.env.NODE_ENV !== "production"
       ? "http://localhost:3000"
-      : "https://brazilianswho.design/";
+      : "https://peruvianswhodesign.vercel.app/";
 
   console.log(origin)
 
@@ -126,7 +126,7 @@ export default function Home({ designers, filters }) {
       }}
     >
       <Head>
-        <title>Brazilians Who Design</title>
+        <title>Peruvians Who Design</title>
         <link id="favicon" rel="alternate icon" href="/favicon.ico" />
         <MetaTags />
       </Head>
@@ -183,7 +183,7 @@ function Content({ designers, handleOpenFilter, className, onClick }) {
     <div className={className} onClick={onClick}>
       <Nav />
 
-      <Title className="title m0 p0" text="Brazilians*who&nbsp;design" />
+      <Title className="title m0 p0" text="Peruvians*who&nbsp;design" />
 
       <motion.div
         initial={{ opacity: 0 }}
