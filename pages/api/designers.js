@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     });
 
     const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: "1u-vQ1fGkclf30XJ8wU5-I0EsITs-OnfyjrjF0tPtdPrI",
+      spreadsheetId: "1u-vQ1fGKclf30XJ8wU5-l0EsITs-OnfryjF0tPtdPrI",
       range: "Designers",
     });
 
