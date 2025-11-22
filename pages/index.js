@@ -335,7 +335,7 @@ function Content({ designers, handleOpenFilter, className, onClick }) {
 
       .clickableRow:hover,
       .clickableRow:focus {
-        background-color: rgba(148, 163, 184, 0.12);
+        background-color: rgba(255, 255, 255, 0.2); /* hover sobre rojo */
         transform: translateY(-1px);
         outline: none;
       }

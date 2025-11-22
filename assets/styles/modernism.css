@@ -74,7 +74,7 @@ table tbody tr {
 }
 
 table tbody tr:hover {
-  background: rgba(0, 0, 0, 0.25); /* un oscurecido suave del rojo */
+  background: rgb(30, 202, 214); /* un oscurecido suave del rojo */
 }
 
 /* Rethink is the best aproch */
@@ -173,7 +173,7 @@ a.link:after {
 .sticky tr {
   position: fixed;
   width: 95vw;
-  background: #000;
+  background: #BF0909 !important; /* tu rojo */;
   padding: 1.5rem 0 1rem 0;
   display: table;
   top: -4rem;
@@ -181,7 +181,7 @@ a.link:after {
   transition: transform 400ms ease-out;
 }
 .sticky td {
-  border-bottom: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
 }
 
 .check svg {
